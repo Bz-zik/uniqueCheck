@@ -3,6 +3,7 @@ package com.sut.uniqueCheck.service.impl;
 import com.sut.uniqueCheck.dto.Data;
 import com.sut.uniqueCheck.repository.DataRepository;
 import com.sut.uniqueCheck.service.DataService;
+import com.sut.uniqueCheck.strategy.Shingle;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class DataServiceImpl implements DataService {
@@ -22,16 +23,23 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public void add(String text, int count) {
-        int uniq = 100;
-        addFieldToTable(text, Math.min(uniq, checkUniq(text, count)));
+
+        final Double minUniq = dataRepository.findAll().stream()
+                                             .map(Data::getText)
+                                             .map(field -> checkUniq(text, count, field))
+                                             .sorted()
+                                             .findFirst()
+                                             .get();
+
+
+        addFieldToTable(text, minUniq);
     }
 
-    private int checkUniq(String text, int count) {
-
-        return 0;
+    private double checkUniq(String text, int count, String oldText) {
+        return new Shingle().getUniq(text, count, oldText);
     }
 
-    private void addFieldToTable(String text, int uniq) {
+    private void addFieldToTable(String text, double uniq) {
         Data data = new Data();
         data.setText(text);
         data.setUniq(uniq);

@@ -14,17 +14,17 @@ public class Data {
 
     private String text;
 
-    private Integer uniq;
+    private double uniq;
 
-    public Integer getId() {
-        return id;
+    public String getText() {
+        return text;
     }
 
     public void setText(String text) {
         this.text = text;
     }
 
-    public void setUniq(Integer uniq) {
+    public void setUniq(double uniq) {
         this.uniq = uniq;
     }
 }

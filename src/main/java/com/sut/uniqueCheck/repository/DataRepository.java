@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface DataRepository extends CrudRepository<Data, Integer> {
+    List<Data> findAll();
     List<Data> findByText(String text);
 }
