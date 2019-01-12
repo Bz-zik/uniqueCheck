@@ -22,7 +22,13 @@ public class DataServiceImpl implements DataService {
 
     @Override
     public void add(String text, int count) {
-        // TODO w-shingling algorithm
+        int uniq = 100;
+        addFieldToTable(text, Math.min(uniq, checkUniq(text, count)));
+    }
+
+    private int checkUniq(String text, int count) {
+
+        return 0;
     }
 
     private void addFieldToTable(String text, int uniq) {
