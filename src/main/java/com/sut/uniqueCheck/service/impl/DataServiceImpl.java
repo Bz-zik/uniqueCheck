@@ -18,7 +18,6 @@ public class DataServiceImpl implements DataService {
     @Autowired
     private DataRepository dataRepository;
 
-
     @Override
     public void add(String text, int count) {
 
@@ -36,11 +35,13 @@ public class DataServiceImpl implements DataService {
         return new ShingleStrategy().getUniq(text, count, oldText);
     }
 
+
     private void addFieldToTable(String text, double uniq) {
         Data data = new Data();
         data.setText(text);
         data.setUniq(uniq);
         dataRepository.save(data);
+        System.out.println("Was added new field to Data Base: " + text + "\t:\t" + uniq);
     }
 
 }

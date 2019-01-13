@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class ShingleStrategy {
 
     private static final String STOP_SYMBOLS[] = {".", ",", "!", "?", ":", ";", "-", "\\", "/", "*", "(", ")", "+", "@",
-            "#", "$", "%", "^", "&", "=", "'", "\"", "[", "]", "{", "}", "|"};
+            "#", "$", "%", "^", "&", "=", "'", "\"", "[", "]", "{", "}", "|", "«", "»"};
     private static final String STOP_WORDS_RU[] = {"это", "как", "так", "и", "в", "над", "к", "до", "не", "на", "но", "за",
             "то", "с", "ли", "а", "во", "от", "со", "для", "о", "же", "ну", "вы",
             "бы", "что", "кто", "он", "она"};
 
 
     /**
-     * Метод сравнивает две последовательности шинглов
+     * Compare two string
      *
-     * @param newText новая строка
-     * @param count   длина выборки
-     * @param oldText строка из БД
-     * @return процент уникальности нового текста
+     * @param newText new text
+     * @param count   count of words for selection in algorithm
+     * @param oldText text from Data Base
+     * @return the uniqueness text
      */
     public double getUniq(String newText, int count, String oldText) {
         ArrayList<Integer> textShingles1New = genShingle(newText, count);
@@ -45,11 +45,11 @@ public class ShingleStrategy {
     }
 
     /**
-     * Метод разбивает текст на шинглы, а затем вычисляет их контрольные суммы.
+     * Transform text to Shingle and get their checksum
      *
-     * @param strNew        строка, для создания шинглов
-     * @param shingleLength длина выборки шинглов
-     * @return ArrayList шинглов в числовом виде
+     * @param strNew        string for creating Shingle
+     * @param shingleLength length of choosing Shingle
+     * @return ArrayList of Shingles
      */
     private ArrayList<Integer> genShingle(String strNew, int shingleLength) {
         ArrayList<Integer> shingles = new ArrayList<Integer>();
@@ -73,11 +73,10 @@ public class ShingleStrategy {
     }
 
     /**
-     * Метод занимается неполной канонизацией строки. Вырезает из строки предлоги, союзы, знаки препинания
-     * и прочие символы, которые не должены участвовать в сравнении.
+     * Not full canonize of string. Delete unneeded words and symbols don't using in comparing <br>
      *
-     * @param str строка, для канонизации
-     * @return канонизированная строка
+     * @param str string for canonize
+     * @return canonized string
      */
     private String canonize(String str) {
         for (String stopSymbol : STOP_SYMBOLS) {

@@ -16,12 +16,19 @@ public class DataController {
     @Autowired
     private DataServiceImpl dataService;
 
+
+    /**
+     * User should send new text and count of words for selection in algorithm in request parameters <br>
+     * Sample POST request: http://localhost:8080/add?text=some string for unique checking&count=2 <br>
+     *
+     * @param text  new text
+     * @param count count of words for selection
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)
     public void addValue(@RequestParam String text, @RequestParam int count) {
         dataService.add(text, count);
     }
-
 
 }
