@@ -8,4 +8,9 @@ public interface DataService {
      * @param count count of words for selection
      */
     void add(String text, int count);
+
+    /**
+     * Clear Data Base and and then fill it with test data
+     */
+    void reset();
 }

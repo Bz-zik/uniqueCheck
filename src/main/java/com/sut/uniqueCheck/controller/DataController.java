@@ -31,4 +31,16 @@ public class DataController {
         dataService.add(text, count);
     }
 
+
+    /**
+     * Clear Data Base and and then fill it with test data
+     * Sample POST request: http://localhost:8080/reset string for unique checking&count=2 <br>
+     */
+    @RequestMapping(value = "/reset", method = RequestMethod.PUT)
+    @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
+    public void reset() {
+        dataService.reset();
+    }
+
 }
